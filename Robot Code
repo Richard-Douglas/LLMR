@@ -1,0 +1,47 @@
+//Declarando as bibliotecas
+#include <SharpIR.h>
+
+// Declarando os Pinos
+int pinoLed = 12; //PINO DIGITAL UTILIZADO PELO LED  
+int pinoSensor_1 = 8;
+int pinoSensor_2 = 7;//PINO DIGITAL UTILIZADO PELO SENSOR
+#define ir A1 //PINO ANALÓGICO EM QUE O SENSOR ESTÁ CONECTADO
+#define model 1080 //DETERMINA O MODELO DO SENSOR (1080 PARA O MODELO 2Y0A21Y)
+SharpIR mySensor( 1, A1 ); //PASSA OS PARÂMETROS PARA A FUNÇÃO (PINO ANALÓGICO, MODELO DO SENSOR)
+// Motor A
+int PWMA = 2;
+int IN1A = 6;
+int IN2A = 7;
+
+// Motor B
+int PWMB = 5;
+int IN1B = 8;
+int IN2B = 9;
+
+//Declarando velocidade
+int MotorSpeed1 = 100;
+int MotorSpeed2 = 100;
+
+void setup(){
+  Serial.begin(9600); //Enviar e receber dados em 9600 baud
+  pinMode(pinoSensor_1, INPUT); //DEFINE O PINO COMO ENTRADA DO SENSOR DE LINHA
+  pinMode(pinoSensor_2, INPUT); //DEFINE O PINO COMO ENTRADA DO SENSOR DE LINHA
+  pinMode(PWMA, OUTPUT); //DEFINE O PINO COMO SAÍDA DA POTÊNCIA DO MOTOR A
+  pinMode(PWMB, OUTPUT); //DEFINE O PINO COMO SAÍDA DA POTÊNCIA DO MOTOR B
+  pinMode(IN1A, OUTPUT); //DEFINE O PINO COMO SAÍDA DA ENTRADA 1A
+  pinMode(IN2A, OUTPUT); //DEFINE O PINO COMO SAÍDA DA ENTRADA 2A
+  pinMode(IN1B, OUTPUT); //DEFINE O PINO COMO SAÍDA DA ENTRADA 1B
+  pinMode(IN2B, OUTPUT); //DEFINE O PINO COMO SAÍDA DA ENTRADA 2B
+}  
+   
+void loop(){
+    // Move o motor A para frente
+    digitalWrite(IN1A, HIGH);
+    digitalWrite(IN2A, LOW);
+    // Move o Motor B para frente
+    digitalWrite(IN1B, HIGH);
+    digitalWrite(IN2B, LOW);
+    analogWrite(PWMA, MotorSpeed1);
+    analogWrite(PWMB, MotorSpeed2);
+    delay(100);  
+}
